@@ -41,7 +41,7 @@ public class MyTask extends AsyncTask<URL, Void, String> {
         this.word = word;
     }
 
-    MyObserver observer = null;
+    private MyObserver observer = null;
     public void setObserver(MyObserver observer) {
         this.observer = observer;
     }
@@ -129,29 +129,36 @@ Log.i("MyTask", "Exception");
           }
         }
 */
-                    Log.i("MyTask", "aaa");
-                    Log.i("MyTask", "json="+json);
-                    JSONObject jo = new JSONObject(json);
-                    Log.i("MyTask", "bbb");
-                    JSONArray elements = jo.getJSONObject("scheme").getJSONArray("elements");
-                    Log.i("MyTask", "ccc");
-                    Log.i("MyTask", "elements.length()="+elements.length());
+                Log.i("MyTask", "aaa");
+                Log.i("MyTask", "json="+json);
+                JSONObject jo = new JSONObject(json);
+                Log.i("MyTask", "bbb");
+                JSONArray elements = jo.getJSONObject("scheme").getJSONArray("elements");
+                Log.i("MyTask", "ccc");
+                Log.i("MyTask", "elements.length()="+elements.length());
 
-                    Bundle map = new Bundle();
+                Bundle map = new Bundle();
 
-                    for (int i = 0; i < elements.length(); i++) {
-                        JSONObject element = elements.getJSONObject(i);
-                        String rgb = element.getString("rgb");
-                        Log.i("MyTask", "rgb="+rgb);
-                        map.putString("param"+i, rgb);
-                    }
-
-                    this.observer.udpate(map, this.serverType);
-
-                } catch (JSONException e) {
-                  Log.i("MyTask", "JSONException");
-                    e.printStackTrace();
+                for (int i = 0; i < elements.length(); i++) {
+                    JSONObject element = elements.getJSONObject(i);
+                    String rgb = element.getString("rgb");
+                    Log.i("MyTask", "rgb="+rgb);
+                    map.putString("param"+i, rgb);
                 }
+                Log.i("MyTask", "ddd");
+
+                this.observer.updateStatus(map, this.serverType);
+                Log.i("MyTask", "eee");
+
+            } catch (JSONException e) {
+              Log.i("MyTask", "JSONException");
+                e.printStackTrace();
+            } catch (Exception e) {
+                Log.i("MyTask", "Exception");
+                e.printStackTrace();
+            } finally {
+                Log.i("MyTask", "finally");
+            }
 
         } else if(this.serverType == ACCESS_IMAGE_SERVER) {
             Log.i("MyTask", "serverType = ACCESS_IMAGE_SERVER");
