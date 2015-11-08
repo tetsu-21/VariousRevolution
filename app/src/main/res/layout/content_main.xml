@@ -14,7 +14,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/frameLayout">
 
         <EditText
             android:layout_width="match_parent"
@@ -32,11 +33,11 @@
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
+            android:layout_width="355dp"
             android:layout_height="wrap_content"
             android:id="@+id/progressBar"
-            android:layout_gravity="center_horizontal|top"
-            android:indeterminate="true" />
+            android:layout_gravity="center_horizontal|top" />
 
     </FrameLayout>
+
 </RelativeLayout>
